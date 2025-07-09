@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Our Friendship Journey</title>
+  <style>
+    body {
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      background-color: #ffe6f0;
+      margin: 0;
+      padding: 20px;
+    }
+    .card {
+      background-color: white;
+      border: 4px dashed pink;
+      padding: 20px;
+      border-radius: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 0 10px rgba(255, 105, 180, 0.3);
+    }
+    h1 {
+      text-align: center;
+      color: hotpink;
+      font-size: 2.5rem;
+    }
+    .timeline {
+      display: flex;
+      align-items: center;
+      overflow-x: auto;
+      padding: 20px 0;
+    }
+    .timeline-step {
+      flex: 0 0 auto;
+      margin-right: 40px;
+      text-align: center;
+      position: relative;
+    }
+    .timeline-step img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid hotpink;
+    }
+    .timeline-step p {
+      margin-top: 10px;
+      font-size: 14px;
+      color: #cc0066;
+    }
+    .timeline-step::after {
+      content: '➜';
+      position: absolute;
+      top: 50%;
+      right: -30px;
+      transform: translateY(-50%);
+      font-size: 20px;
+      color: hotpink;
+    }
+    .timeline-step:last-child::after {
+      content: '';
+    }
+    .button-area {
+      text-align: center;
+      margin-top: 30px;
+    }
+    .next-button {
+      padding: 10px 25px;
+      font-size: 16px;
+      background-color: #ff99cc;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .next-button:hover {
+      background-color: #ff66b2;
+    }
+  </style>
+</head>
+<body>
+  <h1>Our Friendship Timeline 💖</h1>
+  <div class="card">
+    <div class="timeline">
+      <div class="timeline-step">
+        <img src="https://via.placeholder.com/120" alt="Memory 1">
+        <p contenteditable="true">First match together</p>
+      </div>
+      <div class="timeline-step">
+        <img src="https://via.placeholder.com/120" alt="Memory 2">
+        <p contenteditable="true">Birthday surprise after training</p>
+      </div>
+      <div class="timeline-step">
+        <img src="https://via.placeholder.com/120" alt="Memory 3">
+        <p contenteditable="true">Late night tactics talk</p>
+      </div>
+      <div class="timeline-step">
+        <img src="https://via.placeholder.com/120" alt="Memory 4">
+        <p contenteditable="true">Goal celebration hug</p>
+      </div>
+    </div>
+  </div>
+  <div class="button-area">
+    <a href="fb.html"><button class="next-button">⚽ Now Football!</button></a>
+    <iframe src="fb.html" style="display: none;"></iframe>
+  </div>
+</body>
+</html>

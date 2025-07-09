@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BroBoard - Secure Journal</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #fce4ec;
+      margin: 0;
+      padding: 0;
+      background-image: url('https://upload.wikimedia.org/wikipedia/en/5/56/Real_Madrid_CF.svg');
+      background-repeat: no-repeat;
+      background-position: top right;
+      background-size: 180px;
+    }
+    nav {
+      background-color: #ec407a;
+      padding: 10px;
+      text-align: center;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 18px;
+      margin: 0 10px;
+    }
+    .card {
+      background-color: white;
+      border-left: 6px solid #ec407a;
+      padding: 20px;
+      margin: 40px auto;
+      border-radius: 15px;
+      max-width: 600px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    }
+    h2 {
+      color: #ec407a;
+      margin-bottom: 15px;
+    }
+    textarea {
+      width: 100%;
+      height: 150px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 10px;
+      font-size: 14px;
+    }
+    input[type="date"], input[type="password"], input[type="text"] {
+      width: 100%;
+      padding: 8px;
+      margin-top: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    button {
+      background-color: #ec407a;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 10px;
+      margin-top: 15px;
+      width: 100%;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    #message {
+      color: green;
+      margin-top: 10px;
+      text-align: center;
+    }
+    #view-result {
+      background-color: #fff3f8;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px dashed #ec407a;
+      margin-top: 15px;
+      white-space: pre-wrap;
+    }
+    .toggle-container {
+      text-align: right;
+      margin-top: 5px;
+    }
+    .toggle-container label {
+      font-size: 12px;
+      color: #666;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="fb.html">← Back to Football</a>
+  </nav>
+
+  <div class="card">
+    <h2>🧠 BroBoard Journal</h2>
+    <input type="date" id="entry-date" />
+    <textarea id="journal-text" placeholder="Write your thoughts here..."></textarea>
+    <input type="password" id="journal-password" placeholder="Enter Password to Save" />
+    <div class="toggle-container">
+      <label><input type="checkbox" onclick="toggleVisibility('journal-password')"> Show Password</label>
+    </div>
+    <button onclick="saveJournal()">Save Entry</button>
+    <div id="message"></div>
+  </div>
+
+  <div class="card">
+    <h2>🔍 View Past Entry</h2>
+    <input type="date" id="view-date" />
+    <input type="password" id="view-password" placeholder="Enter Password to View" />
+    <div class="toggle-container">
+      <label><input type="checkbox" onclick="toggleVisibility('view-password')"> Show Password</label>
+    </div>
+    <button onclick="viewJournal()">View Entry</button>
+    <div id="view-result"></div>
+  </div>
+
+  <script>
+    const correctPassword = "madrid123"; // Password to use for saving and viewing journal
+
+    function toggleVisibility(id) {
+      const field = document.getElementById(id);
+      field.type = field.type === "password" ? "text" : "password";
+    }
+
+    function saveJournal() {
+      const date = document.getElementById("entry-date").value;
+      const text = document.getElementById("journal-text").value;
+      const password = document.getElementById("journal-password").value;
+      const message = document.getElementById("message");
+
+      console.log("[SAVE] Entered password:", password);
+
+      if (!date || !text || !password) {
+        message.style.color = "red";
+        message.innerText = "Please fill all fields.";
+        return;
+      }
+
+      if (password !== correctPassword) {
+        message.style.color = "red";
+        message.innerText = "Incorrect password. Access denied.";
+        return;
+      }
+
+      localStorage.setItem(`broboard-${date}`, text);
+      message.style.color = "green";
+      message.innerText = "Saved successfully for " + date + "!";
+
+      document.getElementById("journal-text").value = "";
+      document.getElementById("entry-date").value = "";
+      document.getElementById("journal-password").value = "";
+    }
+
+    function viewJournal() {
+      const date = document.getElementById("view-date").value;
+      const password = document.getElementById("view-password").value;
+      const resultDiv = document.getElementById("view-result");
+
+      console.log("[VIEW] Entered password:", password);
+
+      if (!date || !password) {
+        resultDiv.style.color = "red";
+        resultDiv.innerText = "Please fill all fields.";
+        return;
+      }
+
+      if (password !== correctPassword) {
+        resultDiv.style.color = "red";
+        resultDiv.innerText = "Incorrect password. Access denied.";
+        return;
+      }
+
+      const saved = localStorage.getItem(`broboard-${date}`);
+
+      if (saved) {
+        resultDiv.style.color = "black";
+        resultDiv.innerText = saved;
+      } else {
+        resultDiv.style.color = "gray";
+        resultDiv.innerText = "No entry found for this date.";
+      }
+
+      document.getElementById("view-password").value = "";
+    }
+  </script>
+</body>
+</html>
