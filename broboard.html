@@ -15,11 +15,13 @@
       background-position: top right;
       background-size: 180px;
     }
+
     nav {
       background-color: #ec407a;
       padding: 10px;
       text-align: center;
     }
+
     nav a {
       color: white;
       text-decoration: none;
@@ -27,6 +29,7 @@
       font-size: 18px;
       margin: 0 10px;
     }
+
     .card {
       background-color: white;
       border-left: 6px solid #ec407a;
@@ -34,12 +37,15 @@
       margin: 40px auto;
       border-radius: 15px;
       max-width: 600px;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
     }
+
     h2 {
       color: #ec407a;
       margin-bottom: 15px;
+      font-size: 24px;
     }
+
     textarea {
       width: 100%;
       height: 150px;
@@ -48,13 +54,17 @@
       padding: 10px;
       font-size: 14px;
     }
-    input[type="date"], input[type="password"], input[type="text"] {
+
+    input[type="date"],
+    input[type="password"],
+    input[type="text"] {
       width: 100%;
       padding: 8px;
       margin-top: 10px;
       border-radius: 5px;
       border: 1px solid #ccc;
     }
+
     button {
       background-color: #ec407a;
       color: white;
@@ -66,11 +76,13 @@
       font-size: 16px;
       cursor: pointer;
     }
+
     #message {
       color: green;
       margin-top: 10px;
       text-align: center;
     }
+
     #view-result {
       background-color: #fff3f8;
       padding: 10px;
@@ -79,14 +91,45 @@
       margin-top: 15px;
       white-space: pre-wrap;
     }
+
     .toggle-container {
       text-align: right;
       margin-top: 5px;
     }
+
     .toggle-container label {
       font-size: 12px;
       color: #666;
       cursor: pointer;
+    }
+
+    @media screen and (max-width: 600px) {
+      body {
+        background-size: 100px;
+        background-position: top right 10px;
+      }
+
+      .card {
+        margin: 20px 10px;
+        padding: 15px;
+      }
+
+      nav a {
+        font-size: 16px;
+      }
+
+      h2 {
+        font-size: 20px;
+      }
+
+      textarea {
+        height: 120px;
+        font-size: 13px;
+      }
+
+      button {
+        font-size: 15px;
+      }
     }
   </style>
 </head>
@@ -119,7 +162,7 @@
   </div>
 
   <script>
-    const correctPassword = "madrid123"; // Password to use for saving and viewing journal
+    const correctPassword = "madrid123";
 
     function toggleVisibility(id) {
       const field = document.getElementById(id);
@@ -131,8 +174,6 @@
       const text = document.getElementById("journal-text").value;
       const password = document.getElementById("journal-password").value;
       const message = document.getElementById("message");
-
-      console.log("[SAVE] Entered password:", password);
 
       if (!date || !text || !password) {
         message.style.color = "red";
@@ -159,8 +200,6 @@
       const date = document.getElementById("view-date").value;
       const password = document.getElementById("view-password").value;
       const resultDiv = document.getElementById("view-result");
-
-      console.log("[VIEW] Entered password:", password);
 
       if (!date || !password) {
         resultDiv.style.color = "red";
